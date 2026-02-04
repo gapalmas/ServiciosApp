@@ -19,6 +19,23 @@ namespace Infrastructure.ServiciosApp.Data
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
+            modelBuilder.Entity<Cliente>().ToTable("Clientes");
+            modelBuilder.Entity<Operador>().ToTable("Operadores");
+            modelBuilder.Entity<Ruta>().ToTable("Rutas");
+            modelBuilder.Entity<Servicio>().ToTable("Servicios");
+
+            modelBuilder.Entity<Cliente>()
+                .HasKey(c => c.Id);
+
+            modelBuilder.Entity<Operador>()
+                .HasKey(o => o.Id);
+
+            modelBuilder.Entity<Ruta>()
+                .HasKey(r => r.Id);
+
+            modelBuilder.Entity<Servicio>()
+                .HasKey(s => s.Id);
+
             modelBuilder.Entity<Servicio>()
                 .HasRequired(s => s.Cliente)
                 .WithMany(c => c.Servicios)

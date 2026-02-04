@@ -52,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\SqlDbContext.cs" />
+    <Compile Include="Migrations\202602042212576_AddInitialTables.cs" />
+    <Compile Include="Migrations\202602042212576_AddInitialTables.designer.cs">
+      <DependentUpon>202602042212576_AddInitialTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,6 +68,11 @@
       <Project>{57DCD18A-AA5B-47BE-887E-7E2D62D57B43}</Project>
       <Name>Core.ServiciosApp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202602042212576_AddInitialTables.resx">
+      <DependentUpon>202602042212576_AddInitialTables.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
