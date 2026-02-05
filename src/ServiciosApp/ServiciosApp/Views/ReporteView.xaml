@@ -1,0 +1,144 @@
+<Window x:Class="ServiciosApp.Views.ReporteView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Reportes" Height="750" Width="1100" WindowStartupLocation="CenterScreen">
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#673AB7" Padding="15">
+            <StackPanel>
+                <TextBlock Text="Reportes" FontSize="20" Foreground="White" FontWeight="Bold"/>
+                <TextBlock Text="Genera reportes configurables por rango de fechas" FontSize="12" Foreground="#EDE7F6"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Panel de Filtros -->
+        <Border Grid.Row="1" Background="White" Margin="15,10,15,10" Padding="15">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="Fecha Inicio" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                    <DatePicker SelectedDate="{Binding FechaInicio}" Width="120" Height="32"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="Fecha Fin" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                    <DatePicker SelectedDate="{Binding FechaFin}" Width="120" Height="32"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="Cliente (ID)" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                    <TextBox Text="{Binding ClienteSeleccionadoId}" Width="100" Height="32" Padding="8"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="Operador (ID)" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                    <TextBox Text="{Binding OperadorSeleccionadoId}" Width="100" Height="32" Padding="8"/>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Bottom" Width="136">
+                    <Button Content="Reporte por Cliente" Command="{Binding GenerarReporteClienteCommand}" 
+                           Background="#4CAF50" Foreground="White" Padding="10" Height="43"/>
+                    <Button Content="Resumen General" Command="{Binding GenerarReporteResumenCommand}" 
+                           Background="#2196F3" Foreground="White" Padding="10" Height="42" Margin="1,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Botones Adicionales -->
+        <Border Grid.Row="1" Background="White" Margin="15,0,15,10" Padding="15,0,15,10" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Acumulado por Tipo" Command="{Binding GenerarReporteAcumuladoCommand}" 
+                       Background="#FF9800" Foreground="White" Padding="10" Margin="0,42,5,29"/>
+                <Button Content="Por Operador" Command="{Binding GenerarReporteOperadorCommand}" 
+                       Background="#E91E63" Foreground="White" Padding="10" Margin="0,42,0,29"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Área de Reportes -->
+        <TabControl Grid.Row="2" Margin="15,0,15,15">
+            <!-- Reporte Servicios por Cliente -->
+            <TabItem Header="Por Cliente">
+                <DataGrid ItemsSource="{Binding ReportesCliente}" 
+                         AutoGenerateColumns="False"
+                         CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID Cliente" Binding="{Binding ClienteId}" Width="80"/>
+                        <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="150"/>
+                        <DataGridTextColumn Header="Total Servicios" Binding="{Binding TotalServicios}" Width="120"/>
+                        <DataGridTextColumn Header="Completados" Binding="{Binding ServiciosCompletados}" Width="100"/>
+                        <DataGridTextColumn Header="Pendientes" Binding="{Binding ServiciosPendientes}" Width="100"/>
+                        <DataGridTextColumn Header="Costo Total" Binding="{Binding CostoTotal, StringFormat=C}" Width="120"/>
+                        <DataGridTextColumn Header="Costo Promedio" Binding="{Binding CostoPromedio, StringFormat=C}" Width="130"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!-- Reporte Acumulado -->
+            <TabItem Header="Acumulado por Tipo">
+                <DataGrid ItemsSource="{Binding ReportesAcumulados}" 
+                         AutoGenerateColumns="False"
+                         CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Tipo" Binding="{Binding TipoNombre}" Width="120"/>
+                        <DataGridTextColumn Header="Total Servicios" Binding="{Binding TotalServicios}" Width="120"/>
+                        <DataGridTextColumn Header="Completados" Binding="{Binding ServiciosCompletados}" Width="120"/>
+                        <DataGridTextColumn Header="Costo Total" Binding="{Binding CostoTotal, StringFormat=C}" Width="120"/>
+                        <DataGridTextColumn Header="Operadores" Binding="{Binding TotalOperadores}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!-- Reporte por Operador -->
+            <TabItem Header="Por Operador">
+                <DataGrid ItemsSource="{Binding ReportesOperador}" 
+                         AutoGenerateColumns="False"
+                         CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID Operador" Binding="{Binding OperadorId}" Width="100"/>
+                        <DataGridTextColumn Header="Operador" Binding="{Binding OperadorNombre}" Width="150"/>
+                        <DataGridTextColumn Header="Total Servicios" Binding="{Binding TotalServicios}" Width="120"/>
+                        <DataGridTextColumn Header="Completados" Binding="{Binding ServiciosCompletados}" Width="120"/>
+                        <DataGridTextColumn Header="En Proceso" Binding="{Binding ServiciosEnProceso}" Width="100"/>
+                        <DataGridTextColumn Header="KM Totales" Binding="{Binding KmTotales}" Width="100"/>
+                        <DataGridTextColumn Header="Minutos" Binding="{Binding MinutosTotales}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!-- Resumen General -->
+            <TabItem Header="Resumen General">
+                <DataGrid ItemsSource="{Binding ReportesResumen}" 
+                         AutoGenerateColumns="False"
+                         CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Total Servicios" Binding="{Binding TotalServicios}" Width="120"/>
+                        <DataGridTextColumn Header="Completados" Binding="{Binding ServiciosCompletados}" Width="120"/>
+                        <DataGridTextColumn Header="Pendientes" Binding="{Binding ServiciosPendientes}" Width="120"/>
+                        <DataGridTextColumn Header="Asignados" Binding="{Binding ServiciosAsignados}" Width="120"/>
+                        <DataGridTextColumn Header="Costo Total" Binding="{Binding CostoTotal, StringFormat=C}" Width="120"/>
+                        <DataGridTextColumn Header="Clientes" Binding="{Binding TotalClientes}" Width="80"/>
+                        <DataGridTextColumn Header="Operadores" Binding="{Binding TotalOperadores}" Width="100"/>
+                        <DataGridTextColumn Header="Rutas" Binding="{Binding TotalRutas}" Width="80"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
+        <!-- Mensajes y Tipo de Reporte -->
+        <Border Grid.Row="3" Padding="15" Background="White">
+            <StackPanel>
+                <TextBlock Text="{Binding TipoReporteSeleccionado}" FontSize="12" FontWeight="Bold" Foreground="#666" Margin="0,0,0,5"/>
+                <TextBlock Text="{Binding MensajeError}" Foreground="#F44336" FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

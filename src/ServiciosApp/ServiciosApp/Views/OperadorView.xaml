@@ -1,0 +1,92 @@
+<Window x:Class="ServiciosApp.Views.OperadorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Gestión de Operadores" Height="600" Width="900" WindowStartupLocation="CenterScreen">
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#FF9800" Padding="15">
+            <StackPanel>
+                <TextBlock Text="Gestión de Operadores" FontSize="20" Foreground="White" FontWeight="Bold"/>
+                <TextBlock Text="Crear, editar, eliminar y cambiar disponibilidad de operadores" FontSize="12" Foreground="#FFE0B2"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Contenido Principal -->
+        <Grid Grid.Row="1" Margin="15,15,15,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Panel de Formulario -->
+            <Border Grid.Column="0" Background="White" Margin="0,0,15,0" Padding="15">
+                <StackPanel>
+                <TextBlock Text="Formulario de Operador" FontSize="14" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                <TextBlock Text="Nombre" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <TextBox Text="{Binding Nombre}" Margin="0,0,0,10" Height="32" Padding="8"/>
+
+                <TextBlock Text="Licencia" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <TextBox Text="{Binding Licencia}" Margin="0,0,0,10" Height="32" Padding="8"/>
+
+                <TextBlock Text="Teléfono" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <TextBox Text="{Binding Telefono}" Margin="0,0,0,10" Height="32" Padding="8"/>
+
+                <CheckBox Content="Disponible" IsChecked="{Binding Disponible}" Margin="0,0,0,15"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button Content="Crear" Command="{Binding CrearOperadorCommand}" 
+                           Background="#4CAF50" Foreground="White" Padding="10" Margin="0,0,5,0" Height="36"/>
+                    <Button Content="Actualizar" Command="{Binding ActualizarOperadorCommand}" 
+                           Background="#2196F3" Foreground="White" Padding="10" Margin="0,0,5,0" Height="36"/>
+                    <Button Content="Eliminar" Command="{Binding EliminarOperadorCommand}" 
+                           Background="#F44336" Foreground="White" Padding="10" Height="36"/>
+                </StackPanel>
+
+                <Button Content="Limpiar" Command="{Binding LimpiarFormularioCommand}" 
+                       Background="#9E9E9E" Foreground="White" Padding="10" Margin="0,10,0,0" Height="37"/>
+                <Button Content="Refrescar" Command="{Binding RefrescarCommand}" 
+                       Background="#FF9800" Foreground="White" Padding="10" Margin="0,10,0,0" Height="38"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Panel de Listado -->
+            <Border Grid.Column="1" Background="White" Padding="15">
+                <StackPanel>
+                <TextBlock Text="Operadores Registrados" FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+                <DataGrid ItemsSource="{Binding Operadores}" 
+                         SelectedItem="{Binding OperadorSeleccionado}"
+                         AutoGenerateColumns="False"
+                         CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="150"/>
+                        <DataGridTextColumn Header="Licencia" Binding="{Binding Licencia}" Width="100"/>
+                        <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="110"/>
+                        <DataGridCheckBoxColumn Header="Disponible" Binding="{Binding Disponible}" Width="80"/>
+                        <DataGridTextColumn Header="Activo" Binding="{Binding Activo}" Width="60"/>
+                        <DataGridTextColumn Header="Registrado" Binding="{Binding FechaRegistro, StringFormat=dd/MM/yyyy}" Width="90"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Mensajes -->
+        <Border Grid.Row="2" Padding="15">
+            <StackPanel>
+            <TextBlock Text="{Binding MensajeExito}" Foreground="#4CAF50" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding MensajeError}" Foreground="#F44336" FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

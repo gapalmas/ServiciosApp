@@ -51,6 +51,16 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.ServiciosApp\Core.ServiciosApp.csproj">
+      <Project>{c5dbf0a3-8c1b-4c1e-9a1f-7d8f7b6c5a4d}</Project>
+      <Name>Core.ServiciosApp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.ServiciosApp\Infrastructure.ServiciosApp.csproj">
+      <Project>{9c3f7b3e-5f4a-4a1f-8c9d-7e5b3f2a1c8d}</Project>
+      <Name>Infrastructure.ServiciosApp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -58,6 +68,22 @@
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AsignacionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OperadorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReporteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServiciosDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -81,6 +107,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ServiceLocator.cs" />
+    <Compile Include="Services\ClienteService.cs" />
+    <Compile Include="Services\OperadorService.cs" />
+    <Compile Include="Services\ReporteService.cs" />
+    <Compile Include="Services\RutaService.cs" />
+    <Compile Include="Services\ServicioService.cs" />
+    <Compile Include="ViewModels\AsignacionViewModel.cs" />
+    <Compile Include="ViewModels\OperadorViewModel.cs" />
+    <Compile Include="ViewModels\ReporteViewModel.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\ServicioViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\AsignacionView.xaml.cs">
+      <DependentUpon>AsignacionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OperadorView.xaml.cs">
+      <DependentUpon>OperadorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReporteView.xaml.cs">
+      <DependentUpon>ReporteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServiciosDetailView.xaml.cs">
+      <DependentUpon>ServiciosDetailView.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

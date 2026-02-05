@@ -1,0 +1,98 @@
+<Window x:Class="ServiciosApp.Views.AsignacionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Asignación de Operadores y Rutas" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#9C27B0" Padding="15">
+            <StackPanel>
+                <TextBlock Text="Asignación de Operadores y Rutas" FontSize="20" Foreground="White" FontWeight="Bold"/>
+                <TextBlock Text="Asigna operadores y rutas a los servicios pendientes" FontSize="12" Foreground="#F3E5F5"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Contenido Principal -->
+        <Grid Grid.Row="1" Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Panel de Control -->
+            <Border Grid.Column="0" Background="White" Margin="0,0,15,0" Padding="15">
+                <StackPanel>
+                <TextBlock Text="Seleccionar Asignación" FontSize="14" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                <TextBlock Text="Operador Disponible" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <ComboBox ItemsSource="{Binding OperadoresDisponibles}" 
+                         SelectedValuePath="Id"
+                         SelectedValue="{Binding OperadorSeleccionadoId}"
+                         DisplayMemberPath="Nombre"
+                         Margin="0,0,0,15" Height="32"/>
+
+                <TextBlock Text="Ruta" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <ComboBox ItemsSource="{Binding Rutas}" 
+                         SelectedValuePath="Id"
+                         SelectedValue="{Binding RutaSeleccionadaId}"
+                         DisplayMemberPath="Nombre"
+                         Margin="0,0,0,20" Height="32"/>
+
+                <TextBlock Text="Acciones" FontSize="12" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                <Button Content="Asignar Operador" Command="{Binding AsignarOperadorCommand}" 
+                       Background="#4CAF50" Foreground="White" Padding="10" Margin="0,0,0,8" Height="36"/>
+                
+                <Button Content="Asignar Ruta" Command="{Binding AsignarRutaCommand}" 
+                       Background="#2196F3" Foreground="White" Padding="10" Margin="0,0,0,8" Height="36"/>
+
+                <Button Content="Desasignar Operador" Command="{Binding DesasignarOperadorCommand}" 
+                       Background="#FF9800" Foreground="White" Padding="10" Margin="0,0,0,8" Height="36"/>
+
+                <Button Content="Desasignar Ruta" Command="{Binding DesasignarRutaCommand}" 
+                       Background="#F44336" Foreground="White" Padding="10" Margin="0,0,0,15" Height="36"/>
+
+                <Button Content="Refrescar" Command="{Binding RefrescarCommand}" 
+                       Background="#757575" Foreground="White" Padding="10" Height="42"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Panel de Listado -->
+            <Border Grid.Column="1" Background="White" Padding="15">
+                <StackPanel>
+                <TextBlock Text="Servicios Pendientes de Asignación" FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+                <DataGrid ItemsSource="{Binding ServiciosPendientes}" 
+                         SelectedItem="{Binding ServicioSeleccionado}"
+                         AutoGenerateColumns="False"
+                         CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nombre}" Width="140"/>
+                        <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="180"/>
+                        <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" Width="100"/>
+                        <DataGridTextColumn Header="Operador" Binding="{Binding Operador.Nombre}" Width="120"/>
+                        <DataGridTextColumn Header="Ruta" Binding="{Binding Ruta.Nombre}" Width="120"/>
+                        <DataGridTextColumn Header="Fecha" Binding="{Binding FechaSolicitud, StringFormat=dd/MM/yyyy}" Width="90"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Mensajes -->
+        <Border Grid.Row="2" Padding="15">
+            <StackPanel>
+            <TextBlock Text="{Binding MensajeExito}" Foreground="#4CAF50" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding MensajeError}" Foreground="#F44336" FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

@@ -1,28 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ServiciosApp.Views;
 
 namespace ServiciosApp
 {
-    /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void BtnServicios_Click(object sender, RoutedEventArgs e)
+        {
+            var ventana = new ServiciosDetailView();
+            ventana.Show();
+        }
+
+        private void BtnOperadores_Click(object sender, RoutedEventArgs e)
+        {
+            var ventana = new OperadorView();
+            ventana.Show();
+        }
+
+        private void BtnAsignaciones_Click(object sender, RoutedEventArgs e)
+        {
+            var ventana = new AsignacionView();
+            ventana.Show();
+        }
+
+        private void BtnReportes_Click(object sender, RoutedEventArgs e)
+        {
+            var ventana = new ReporteView();
+            ventana.Show();
+        }
+
+        private void BtnSalir_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Button_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                button.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(66, 66, 66));
+            }
+        }
+
+        private void Button_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                button.Background = System.Windows.Media.Brushes.Transparent;
+            }
         }
     }
 }

@@ -1,0 +1,108 @@
+<Window x:Class="ServiciosApp.Views.ServiciosDetailView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Gestión de Servicios" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#2196F3" Padding="15">
+            <StackPanel>
+                <TextBlock Text="Gestión de Servicios" FontSize="20" Foreground="White" FontWeight="Bold"/>
+                <TextBlock Text="Registro, edición y eliminación de servicios" FontSize="12" Foreground="#E3F2FD"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Contenido Principal -->
+        <Grid Grid.Row="1" Margin="15,15,15,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Panel de Formulario -->
+            <Border Grid.Column="0" Background="White" Margin="0,0,15,0" Padding="15">
+                <StackPanel>
+                <TextBlock Text="Crear/Editar Servicio" FontSize="14" FontWeight="Bold" Margin="0,0,0,15"/>
+
+                <TextBlock Text="Cliente" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <ComboBox ItemsSource="{Binding Clientes}" 
+                         SelectedValuePath="Id"
+                         SelectedValue="{Binding ClienteSeleccionadoId}"
+                         DisplayMemberPath="Nombre"
+                         Margin="0,0,0,10" Height="32"/>
+
+                <TextBlock Text="Tipo de Servicio" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <ComboBox SelectedItem="{Binding Tipo}" Margin="0,0,0,10" Height="32">
+                    <System:String xmlns:System="clr-namespace:System;assembly=mscorlib">Entrega</System:String>
+                    <System:String xmlns:System="clr-namespace:System;assembly=mscorlib">Recoleccion</System:String>
+                    <System:String xmlns:System="clr-namespace:System;assembly=mscorlib">Instalacion</System:String>
+                    <System:String xmlns:System="clr-namespace:System;assembly=mscorlib">Mantenimiento</System:String>
+                    <System:String xmlns:System="clr-namespace:System;assembly=mscorlib">Otro</System:String>
+                </ComboBox>
+
+                <TextBlock Text="Descripción" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <TextBox Text="{Binding Descripcion}" Margin="0,0,0,10" Height="60" 
+                        TextWrapping="Wrap" VerticalAlignment="Top" Padding="8"/>
+
+                <TextBlock Text="Dirección Origen" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <TextBox Text="{Binding DireccionOrigen}" Margin="0,0,0,10" Height="32" Padding="8"/>
+
+                <TextBlock Text="Dirección Destino" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <TextBox Text="{Binding DireccionDestino}" Margin="0,0,0,10" Height="32" Padding="8"/>
+
+                <TextBlock Text="Costo ($)" FontSize="11" Foreground="#666" Margin="0,0,0,5"/>
+                <TextBox Text="{Binding Costo}" Margin="0,0,0,15" Height="32" Padding="8"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button Content="Crear" Command="{Binding CrearServicioCommand}" 
+                           Background="#4CAF50" Foreground="White" Padding="10" Margin="0,0,5,0" Height="36"/>
+                    <Button Content="Actualizar" Command="{Binding ActualizarServicioCommand}" 
+                           Background="#2196F3" Foreground="White" Padding="10" Margin="0,0,5,0" Height="36"/>
+                    <Button Content="Eliminar" Command="{Binding EliminarServicioCommand}" 
+                           Background="#F44336" Foreground="White" Padding="10" Height="36"/>
+                </StackPanel>
+
+                <Button Content="Refrescar" Command="{Binding RefrescarCommand}" 
+                       Background="#FF9800" Foreground="White" Padding="10" Margin="0,10,0,0" Height="32"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Panel de Listado -->
+            <Border Grid.Column="1" Background="White" Padding="15">
+                <StackPanel>
+                <TextBlock Text="Servicios" FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+                <DataGrid ItemsSource="{Binding Servicios}" 
+                         SelectedItem="{Binding ServicioSeleccionado}"
+                         AutoGenerateColumns="False"
+                         CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                        <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nombre}" Width="150"/>
+                        <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="180"/>
+                        <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" Width="100"/>
+                        <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="100"/>
+                        <DataGridTextColumn Header="Costo" Binding="{Binding Costo, StringFormat=C}" Width="80"/>
+                        <DataGridTextColumn Header="Fecha" Binding="{Binding FechaSolicitud, StringFormat=dd/MM/yyyy}" Width="90"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Mensajes -->
+        <Border Grid.Row="2" Padding="15">
+            <StackPanel>
+            <TextBlock Text="{Binding MensajeExito}" Foreground="#4CAF50" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding MensajeError}" Foreground="#F44336" FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

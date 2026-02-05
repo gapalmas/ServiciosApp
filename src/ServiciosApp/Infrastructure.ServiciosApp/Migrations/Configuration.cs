@@ -5,6 +5,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -23,6 +24,9 @@
 
         protected override void Seed(SqlDbContext context)
         {
+            // Eliminar la base de datos para hacer limpia la creación
+            RecreateDatabaseIfNeeded(context);
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
@@ -46,6 +50,28 @@
             Console.WriteLine("--- SEED COMPLETADO EXITOSAMENTE ---");
         }
 
+
+
+        private void RecreateDatabaseIfNeeded(SqlDbContext context)
+        {
+            try
+            {
+                if (context.Clientes.Any() || context.Operadores.Any() || context.Rutas.Any() || context.Servicios.Any())
+                {
+                    //Console.WriteLine("Limpiando base de datos existente...");
+                    //context.Database.ExecuteSqlCommand("DELETE FROM [dbo].[Servicios]");
+                    //context.Database.ExecuteSqlCommand("DELETE FROM [dbo].[Rutas]");
+                    //context.Database.ExecuteSqlCommand("DELETE FROM [dbo].[Operadores]");
+                    //context.Database.ExecuteSqlCommand("DELETE FROM [dbo].[Clientes]");
+                    //context.SaveChanges();
+                    //Console.WriteLine("Base de datos limpiada exitosamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Aviso: no se pudieron limpiar las tablas: {ex.Message}");
+            }
+        }
 
         #region Seeders
 

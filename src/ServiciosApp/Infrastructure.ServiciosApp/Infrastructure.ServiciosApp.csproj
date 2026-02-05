@@ -52,12 +52,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\SqlDbContext.cs" />
+    <Compile Include="Data\DbInitializer.cs" />
+    <Compile Include="DTOs\ReporteDTOs.cs" />
     <Compile Include="Migrations\202602042212576_AddInitialTables.cs" />
     <Compile Include="Migrations\202602042212576_AddInitialTables.designer.cs">
       <DependentUpon>202602042212576_AddInitialTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Repositories\ReporteRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

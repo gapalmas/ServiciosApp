@@ -50,6 +50,8 @@
     <Compile Include="Entities\Operador.cs" />
     <Compile Include="Entities\Ruta.cs" />
     <Compile Include="Entities\Servicio.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

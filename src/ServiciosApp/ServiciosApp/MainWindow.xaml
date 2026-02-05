@@ -5,8 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServiciosApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Servicios App - Sistema de Gestión" Height="600" Width="1235" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FAFAFA">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#1976D2" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Sistema de Gestión de Servicios" FontSize="24" Foreground="White" FontWeight="Bold"/>
+                <TextBlock Text="Bienvenido al sistema de gestión de servicios, operadores y rutas" FontSize="12" Foreground="#BBDEFB" Margin="0,5,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Contenido -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Menú Lateral -->
+            <Border Grid.Column="0" Background="#263238">
+                <StackPanel>
+                    <Border Padding="15,20,15,10">
+                        <TextBlock Text="Módulos" FontSize="14" Foreground="White" FontWeight="Bold"/>
+                    </Border>
+
+                    <Button Content="Servicios" Click="BtnServicios_Click" 
+                           Background="Transparent" Foreground="White" Padding="15,12" Height="45"
+                           BorderThickness="0" HorizontalContentAlignment="Left" Cursor="Hand"
+                           MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+
+                    <Button Content="Operadores" Click="BtnOperadores_Click" 
+                           Background="Transparent" Foreground="White" Padding="15,12" Height="45"
+                           BorderThickness="0" HorizontalContentAlignment="Left" Cursor="Hand"
+                           MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+
+                    <Button Content="Asignaciones" Click="BtnAsignaciones_Click" 
+                           Background="Transparent" Foreground="White" Padding="15,12" Height="45"
+                           BorderThickness="0" HorizontalContentAlignment="Left" Cursor="Hand"
+                           MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+
+                    <Button Content="Reportes" Click="BtnReportes_Click" 
+                           Background="Transparent" Foreground="White" Padding="15,12" Height="45"
+                           BorderThickness="0" HorizontalContentAlignment="Left" Cursor="Hand"
+                           MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+
+                    <Separator Background="#455A64" Margin="0,20,0,20"/>
+
+                    <Button Content="Salir" Click="BtnSalir_Click" 
+                           Background="Transparent" Foreground="#EF5350" Padding="15,12" Height="45"
+                           BorderThickness="0" HorizontalContentAlignment="Left" Cursor="Hand"
+                           MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Área de Contenido -->
+            <Border Grid.Column="1" Padding="30">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Bienvenido" FontSize="32" Foreground="#1976D2" FontWeight="Bold" Margin="0,0,0,20"/>
+                    <TextBlock Text="Selecciona un módulo en el menú lateral para comenzar" FontSize="16" Foreground="#666" Margin="0,0,0,30"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                        <StackPanel Margin="0,0,40,0">
+                            <TextBlock Text="Servicios" FontSize="14" FontWeight="Bold" Foreground="#2196F3" Margin="0,0,0,8"/>
+                            <TextBlock Text="Registra, edita y elimina servicios sin asignación inicial" FontSize="12" Foreground="#999" TextWrapping="Wrap" MaxWidth="200"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="0,0,40,0">
+                            <TextBlock Text="Operadores" FontSize="14" FontWeight="Bold" Foreground="#FF9800" Margin="0,0,0,8"/>
+                            <TextBlock Text="Gestiona operadores, licencias y disponibilidad" FontSize="12" Foreground="#999" TextWrapping="Wrap" MaxWidth="200"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="0,0,40,0">
+                            <TextBlock Text="Asignaciones" FontSize="14" FontWeight="Bold" Foreground="#9C27B0" Margin="0,0,0,8"/>
+                            <TextBlock Text="Asigna operadores y rutas a los servicios" FontSize="12" Foreground="#999" TextWrapping="Wrap" MaxWidth="200"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Reportes" FontSize="14" FontWeight="Bold" Foreground="#673AB7" Margin="0,0,0,8"/>
+                            <TextBlock Text="Genera reportes por rango de fechas" FontSize="12" Foreground="#999" TextWrapping="Wrap" MaxWidth="200"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
